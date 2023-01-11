@@ -1,0 +1,11 @@
+#!/usr/bin/env ruby
+
+require 'prestruct'
+
+option = ARGV[0]
+
+puts "prestructing"
+
+if option == 'sinatra'
+  PreStruct.sinatra_single
+end
