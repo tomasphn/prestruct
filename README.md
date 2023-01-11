@@ -1,1 +1,1 @@
-read ME!
+A CLI ruby gem that preconstructs the basic file structures for different formats of ruby projects. Currently only supports Sinatra. Mostly for expirementation and personal usage so the structuring is semi-opinionated. 
