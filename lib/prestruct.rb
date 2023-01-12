@@ -5,13 +5,11 @@ module PreStruct
   class << self
     include SinatraStruct
 
-    def sinatra_simple
-      SinatraStruct::Base.new('big_project')
+    def sinatra_simple(project_name)
+      SinatraStruct::Base.new(project_name)
     end
   end
 end
-
-PreStruct.sinatra_simple
 
 # sinatra_basic
 =begin

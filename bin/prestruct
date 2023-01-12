@@ -1,11 +1,31 @@
 #!/usr/bin/env ruby
 
 require 'prestruct'
+require 'slop'
 
-option = ARGV[0]
+puts "prestructing..."
 
-puts "prestructing"
+opts = Slop.parse do |o|
+  o.string 'sinatra', 'create sinatra project', suppress_errors: true
+  o.string '-n', '--name', 'project name', suppress_errors: true
+  o.bool '-h', '--help'
+end
 
-if option == 'sinatra'
-  PreStruct.sinatra_single
+args = opts.to_hash
+puts args
+
+args[:name] ||= 'project_name'
+if args[:sinatra]
+  case args[:sinatra]
+  when "simple"
+    PreStruct.sinatra_simple(args[:name])
+  when "mvc"
+    puts "making mvc project"
+  else
+    puts "Please specify either 'simple' or 'mvc' after 'sinatra'"
+  end
+elsif args[:help]
+  puts "Usage: prestruct [sinatra mvc/simple] [-n project name]"
+else
+  puts "Usage: prestruct [sinatra mvc/simple] [-n project name]"
 end
