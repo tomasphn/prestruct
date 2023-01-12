@@ -1,49 +1,24 @@
-module Builders
-  def rw_file(path, contents)
-    File.open(path, "w+") do |f|
-      f.write contents
-    end
-  end
-end
+require_relative 'prestruct/builders.rb'
+require_relative 'prestruct/sinatra.rb'
 
 module PreStruct
   class << self
-    def sinatra_single
-      Dir.mkdir("project_name")
-      SinatraAppStruct.single_file("project_name/")
-    end
-  end
+    include SinatraStruct
 
-  class SinatraAppStruct
-    class << self
-      include Builders
-      def single_file(path)
-        Dir.mkdir(path + "app")
-        contents = <<~FILE
-          require 'sinatra'
-          # routes go here
-        FILE
-        rw_file(path + "app/app.rb", contents)
-    
-        Dir.mkdir(path + "app/views")
-        contents2 = <<~FILE
-          <!--html here--> 
-        FILE
-        rw_file(path + "app/views/view.erb", contents2)
-      end
+    def sinatra_simple
+      SinatraStruct::Base.new('big_project')
     end
   end
 end
 
+PreStruct.sinatra_simple
 
 # sinatra_basic
 =begin
   app
     routes.rb
-    model.rb
     views
       view.erb
-      layout.erb
   public
     stylesheets
       styles.css
@@ -79,13 +54,40 @@ end
     spec_helper.rb
 =end
 
-# Builders to make files/directories helpers module(seperate file)
+# Builders, helper module to make files/directories (seperate file)
+#   Create and write file method(path, contents)
+#   Create multiple directories(*paths)
+#   Create common files
 
+# include outside files
 # Main application(module)
 #   self block
-#     method for each command
-#       sinatra single file
-#       sinatra mvc
+#     include Sinatra module
+#
+#     method for each command/file type(maybe project type method with logic tree within
+#                                       so sinatra("single") creates single file sinatra project)
+#     sinatra single file
+#     sinatra mvc
+#     other project types
 
-# Sinatra module (seperate file?)
-#   Base class
+# Sinatra module (seperate file)
+#   includes builders
+#
+#   Base class(single file)
+#     initialize
+#       set @root to project name
+#       run construct project folder method
+#
+#     construct project folder method
+#       create project folder (builder method, pass @root)
+#       create app folder method (pass @root)
+#         create app folder, and view folder within (builder method, pass @root)
+#         put single rb file within app folder (builder method)
+#         put 
+#       create public folder method
+#     
+#   basic database << Base (inherits from base class)
+#   mvc << Base
+#   others..
+
+# Other modules for each other project type

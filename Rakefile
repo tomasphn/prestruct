@@ -20,8 +20,13 @@ task :publish => :build do
   system 'gem push ' + GEM_NAME + "-" + GEM_VERSION + ".gem"
 end
 
-desc 'delete built gem file'
+desc 'delete built gem file and built project directories'
 task :clean do
   system "rm *.gem"
-  system "rm -r project_name"
+  system "rm -r *project"
+end
+
+desc 'runs project file'
+task :run do
+  system "ruby lib/prestruct.rb"
 end
