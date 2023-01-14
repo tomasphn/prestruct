@@ -1,7 +1,7 @@
 require 'rake'
+require_relative 'lib/prestruct/version.rb'
 
 GEM_NAME = "prestruct"
-GEM_VERSION = "0.1.0"
 
 task :default => :install
 
@@ -12,12 +12,12 @@ end
 
 desc 'install built gem'
 task :install => :build do
-  system "gem install " + GEM_NAME + "-" + GEM_VERSION + ".gem"
+  system "gem install " + GEM_NAME + "-" + PreStruct::VERSION + ".gem"
 end
 
 desc 'publish built gem online'
 task :publish => :build do
-  system 'gem push ' + GEM_NAME + "-" + GEM_VERSION + ".gem"
+  system 'gem push ' + GEM_NAME + "-" + PreStruct::VERSION + ".gem"
 end
 
 desc 'delete built gem file and built project directories'
