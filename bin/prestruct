@@ -8,7 +8,13 @@ puts "prestructing..."
 opts = Slop.parse do |o|
   o.string 'sinatra', 'create sinatra project', suppress_errors: true
   o.string '-n', '--name', 'project name', suppress_errors: true
-  o.bool '-h', '--help'
+  o.on '-h', '--help' do
+    puts 'Usage: prestruct [sinatra mvc/simple] [-n project name]'
+    exit
+  end
+  o.on '-v', '--version' do
+    puts 'prestruct v0.1.0'
+  end
 end
 
 args = opts.to_hash
@@ -24,8 +30,6 @@ if args[:sinatra]
   else
     puts "Please specify either 'simple' or 'mvc' after 'sinatra'"
   end
-elsif args[:help]
-  puts "Usage: prestruct [sinatra mvc/simple] [-n project name]"
 else
-  puts "Usage: prestruct [sinatra mvc/simple] [-n project name]"
+  puts "Usage: prestruct [sinatra mvc/simple] [-n project_name]"
 end
