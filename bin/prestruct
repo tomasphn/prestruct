@@ -14,6 +14,7 @@ opts = Slop.parse do |o|
   end
   o.on '-v', '--version' do
     puts 'prestruct v0.1.0'
+    exit
   end
 end
 
@@ -24,7 +25,7 @@ args[:name] ||= 'project_name'
 if args[:sinatra]
   case args[:sinatra]
   when "simple"
-    PreStruct.sinatra_simple(args[:name])
+    SinStruct::Base.new(args[:name])
   when "mvc"
     puts "making mvc project"
   else

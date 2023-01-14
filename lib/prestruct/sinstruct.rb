@@ -12,6 +12,8 @@ module SinStruct
       construct
     end
 
+    private
+
     def construct
       # create folder object with name
       @root = Folder.new(@project_name)
@@ -33,8 +35,7 @@ module SinStruct
 
     def build_views
       @views = @app.add_folder("views")
-      @views.add_files(Sinatra.view)
-      @views.add_files(Sinatra.layout)
+      @views.add_files(Sinatra.view, Sinatra.layout)
     end
 
     def build_public
@@ -51,5 +52,3 @@ module SinStruct
 
   end
 end
-
-SinStruct::Base.new("new_project")

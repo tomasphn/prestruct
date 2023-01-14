@@ -15,24 +15,13 @@ module Outer
     end
 
     def innr_mod_method
-      "inner mod"
+      "reg mod"
     end
 
     module_function :getter
   end
 end
 
-class Bang
-  include Outer
-  include Outer::Inner
-  def call_reg
-    puts reg_mod_method
-  end
 
-  def call_innr
-    puts innr_mod_method
-  end
-end
-
-Bang.new.call_reg
-Bang.new.call_innr
+puts Outer::Inner.getter
+puts Outer.tester
