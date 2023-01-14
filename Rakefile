@@ -23,10 +23,5 @@ end
 desc 'delete built gem file and built project directories'
 task :clean do
   system "rm *.gem"
-  system "rm -r *project"
-end
-
-desc 'runs project file'
-task :run do
-  system "ruby lib/prestruct.rb"
+  system "rm -r *project*"
 end
