@@ -28,8 +28,6 @@
   public
     stylesheets
       styles.css
-  config - for setting enviromental configs?
-    enviroment.rb
   spec - rspec test suites for each file type?
     controllers
     features

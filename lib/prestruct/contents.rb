@@ -53,6 +53,14 @@ module FileContents
       def config
         ["config.ru", "require 'route_to_controller'\nrun Sinatra::Application"]
       end
+
+      def helpers
+        ["helpers.rb", "# helper methods go here"]
+      end
+
+      def spec(project_name)
+        ["#{project_name}_test.rb", "require 'route_to_controller'\n# tests for project go here"]
+      end
     end
   end
 end

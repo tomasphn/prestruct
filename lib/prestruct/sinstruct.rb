@@ -22,7 +22,7 @@ module SinStruct
       # create public dir > add all files
       build_public
       # add loose files to folder
-      add_loose_files
+      build_loose_files
       # create folder
       @root.create
     end
@@ -43,12 +43,49 @@ module SinStruct
       @public.add_files(FileContents.css)
     end
 
-    def add_loose_files
+    def build_loose_files
       @root.add_files(Sinatra.config, Sinatra.gemfile, FileContents.readme)
     end
   end
 
   class Mvc < Base
+    def construct
+      @root = Folder.new(@project_name)
+      build_app
+      build_public
+      build_specs
+      build_loose_files
+      @root.create
+    end
 
+    private
+
+    def build_app
+      @app = @root.add_folder("app")
+      build_models
+      build_controller
+      build_views
+      build_helpers
+    end
+
+    def build_models
+      @models = @app.add_folder("models")
+      @models.add_files(Sinatra.model)
+    end
+
+    def build_controller
+      @controllers = @app.add_folder("controllers")
+      @controllers.add_files(Sinatra.controller(@root))
+    end
+
+    def build_helpers
+      @helpers = @app.add_folder("helpers")
+      @helpers.add_files(Sinatra.helpers)
+    end
+
+    def build_specs
+      @specs = @app.add_folder("specs")
+      @specs.add_files(Sinatra.spec(@root))
+    end
   end
 end
