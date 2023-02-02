@@ -22,11 +22,13 @@ args[:name] ||= 'project_name'
 if args[:sinatra]
   case args[:sinatra]
   when "simple"
-    puts "prestructing..."
+    puts "Prestructing..."
     SinStruct::Base.new(args[:name])
+    puts "Simple Sinatra project '#{args[:name]}' created."
   when "mvc"
-    puts "prestructing..."
+    puts "Prestructing..."
     SinStruct::Mvc.new(args[:name])
+    puts "Mvc Sinatra project '#{args[:name]}' created."
   else
     puts "Please specify either 'simple' or 'mvc' after 'sinatra'"
   end
